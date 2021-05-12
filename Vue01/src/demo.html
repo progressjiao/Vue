@@ -8,15 +8,28 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
+    <!-- 需求：点击按钮count和double的值会增加，double为count的双倍，double用computed实现 -->
     <div id="app">
-        <input v-model="inputVal"/>{{inputVal}}
+        {{count}} {{double}}
+        <button @click="handleClick">点击</button>
     </div>
     <script>
         const app = new Vue({
             el:'#app',
             data:{
-                inputVal:''
-            }
+                count:1,
+
+            },
+            methods: {
+                handleClick(){
+                    this.count++
+                }
+            },
+            computed: {
+                double() {
+                    return this.count * 2 
+                }
+            },
         })
     </script>
 </body>
