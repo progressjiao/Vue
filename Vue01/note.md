@@ -301,4 +301,85 @@ const app = new Vue({
 ```
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c64c4640d134447f8006b9a0a5626714~tplv-k3u1fbpfcp-watermark.image)
+## class & style
+class
+```HTML
+<style>
+    .red{
+        color: red;
+    }
 
+    .fontSize{
+        font-size: 60px;
+    }
+</style>
+
+<div id="app">
+    {{msg}}
+    <div :class="classes">foo</div>
+</div>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            msg:'hello Vue',
+            count:1,
+            // 1.对象形式
+            // classes:{
+            //     red:false
+            // },
+            // 2.数组形式
+            // classes:['red']
+            // 3.联合使用
+            // classes:['red', {fontSize:true}]
+        },
+        // 4.计算属性
+        computed: {
+            classes() {
+                return ['red',
+                    {
+                        fontSize:this.count == 1
+                    }
+                ]
+            }
+        },
+    })
+</script>
+```
+style
+
+```js
+<div id="app">
+    {{msg}}
+    <div :style="styleInfo">foo</div>
+</div>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            msg:'hello Vue',
+            count:1,
+            styleInfo:{
+                color:"blue",
+                fontSize:"100px"
+            }
+        }
+    })
+</script>
+```
+## 表单输入绑定
+v-model
+
+```HTML
+<div id="app">
+    <input v-model="inputVal"/>{{inputVal}}
+</div>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            inputVal:''
+        }
+    })
+</script>
+```

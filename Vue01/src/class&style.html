@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .red{
+            color: red;
+        }
+
+        .fontSize{
+            font-size: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <div :class="classes" :style="styleInfo">foo</div>
+    </div>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello Vue',
+                count:1,
+                // 1.对象形式
+                // classes:{
+                //     red:false
+                // },
+                // 2.数组形式
+                // classes:['red']
+                // 3.联合使用
+                // classes:['red', {fontSize:true}]
+                styleInfo:{
+                    color:"blue",
+                    fontSize:"100px"
+                }
+            },
+            // 4.计算属性
+            computed: {
+                classes() {
+                    return ['red',
+                        {
+                            fontSize:this.count == 1
+                        }
+                    ]
+                }
+            },
+        })
+    </script>
+</body>
+</html>
