@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+	<div v-if="age<18">未成年</div>
+	<div v-else-if="age=18">18岁</div>
+	<div v-else>成年了</div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+		age:18
+      }
+    })
+  </script>
+</body>
+</html>
+

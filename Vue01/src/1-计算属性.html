@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Computed</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+	<p>调用计算属性{{reverseMsg + reverseMsg}}</p>
+	<p>调用方法{{handleClick()}}</p>
+	<button type="button" @click="handleClick()">click</button>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+		count:1
+      },
+	  computed: {
+	  	reverseMsg() {
+			console.log('调用计算属性');
+	  		return this.message.split('').reverse().join('') + this.count; 
+	  	}
+	  },
+	  methods:{
+		  handleClick(){
+			console.log('调用方法');
+			return this.message.split('').reverse().join('') + this.count; 
+		  }
+	  }
+    })
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>watch</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }} -- {{ count }}
+	<div>
+		{{foo}} -- {{bar}}
+	</div>
+	<button type="button" @click="handleClick()">click</button>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+		count:1,
+		foo:'foo',
+		bar:'bar',
+		user:{
+			name:'xiaohong',
+			age:18
+		}
+      },
+	  methods: {
+	  	handleClick() {
+	  		this.count++;
+	  	}
+	  },
+	  watch: {
+		  // 函数形式
+	  // 	count(newValue, oldValue) {
+	  // 		console.log('oldValue', oldValue);
+			// console.log('newValue', newValue);
+			// console.log('count is changed');
+			// this.foo = 'foo' + newValue;
+			// this.bar = 'bar' + newValue;
+	  // 	}
+		// 对象形式
+		count:{
+			handler(newValue, oldValue){
+				console.log('oldValue', oldValue);
+				console.log('newValue', newValue);
+				console.log('count is changed');
+				this.foo = 'foo' + newValue;
+				this.bar = 'bar' + newValue;
+			},
+			immediate:true
+		},
+		user:{
+			handler(oldVal, newVal){
+				console.log(newVal);
+			},
+			deep:true
+		},
+		'user.name':{
+			handler(newVal, oldVal){
+				console.log('user.name is changed');
+				console.log(newVal);
+			}
+		}
+	  }
+    })
+  </script>
+</body>
+</html>
+

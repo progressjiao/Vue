@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app" :test-id = 'testId'>
+    {{ message }}
+	{{count}}
+	<button type="button" @click.once="handleClick($event, 1)">click</button>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+		count:0,
+		testId:4
+      },
+	  methods:{
+		  handleClick(e, type){
+			  this.count++
+			  console.log(e, type);
+		  }
+	  }
+    })
+  </script>
+</body>
+</html>
+

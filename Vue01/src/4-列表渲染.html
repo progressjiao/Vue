@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    <ul>
+    	<li v-for="(item, index) in users">{{index}} -- {{item.name}} -- {{item.age}}</li>
+    </ul>
+	
+	<ul>
+		<li v-for="(val, key, index) in userInfo">{{index}} -- {{key}} -- {{val.name}} -- {{val.age}}</li>
+	</ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        users:[
+			{
+				id:1,
+				name:'hhh',
+				age:18
+			},
+			{
+				id:2,
+				name:'jjj',
+				age:30
+			}
+		],
+		userInfo:{
+			1:{
+				id:1,
+				name:'hhh',
+				age:18
+			},
+			2:{
+				id:2,
+				name:'jjj',
+				age:30
+			}
+		}
+      }
+    })
+  </script>
+</body>
+</html>
+
