@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // 子组件的子组件
+        const Bar = {
+            template:`<div>bar</div>`
+        }
+
+        // 局部注册的子组件
+        const Foo = {
+            data() {
+                return {
+                    msg: "Foo",
+                    count:1
+                }
+            },
+            components: {
+                Bar,
+            },
+            beforeCreate () {
+                // 创建之前调用，一般很少用到
+                console.log('beforeCreate');;
+            },
+            created () {
+                // 用于请求后端接口来获取数据
+                console.log('created');
+                console.log(this.$el); // undefined
+            },
+            beforeMount () {
+                // 挂载之前
+                console.log('beforeMounted');
+            },
+            mounted () {
+                // 渲染完成了
+                console.log('mounted');
+                console.log(this.$el); // Vue 实例使用的根 DOM 元素。
+            },
+            beforeUpdate () {
+                // 更新之前
+                console.log('beforeUpdate');
+            },
+            updated () {
+                // 更新完成了
+                console.log('updated');
+            },
+            beforeDestroy () {
+                // 销毁之前
+                console.log('beforeDestory');
+            },
+            destroyed () {
+                // 销毁完成
+                console.log('destoryed');
+            },
+            template:`<div>{{msg}} --- {{count}}
+                <button @click="count++">click</button>
+                <Bar></Bar></div>`
+        }
+
+        //根组件
+        const app = new Vue({
+            el:"#app",
+            data:{
+                msg:'hello vue!',
+                showFoo:true
+            },
+            components: {
+                Foo
+            },
+            methods: {
+                handleShowfoo() {
+                    this.showFoo = !this.showFoo;
+                }
+            },
+            template:`<div>
+                {{msg}}
+                <button @click="handleShowfoo">showFoo</button>
+                <Foo v-if="showFoo"></Foo>
+            </div>` 
+        })
+    </script>
+</body>
+</html>
