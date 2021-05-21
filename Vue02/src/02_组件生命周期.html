@@ -12,7 +12,33 @@
     <script>
         // 子组件的子组件
         const Bar = {
-            template:`<div>bar</div>`
+            beforeCreate () {
+                console.log('bar -- beforeCreate');;
+            },
+            created () {
+                console.log('bar -- created');
+                console.log(this.$el); // undefined
+            },
+            beforeMount () {
+                console.log('bar -- beforeMounted');
+            },
+            mounted () {
+                console.log('bar -- mounted');
+                console.log(this.$el); // Vue 实例使用的根 DOM 元素。
+            },
+            beforeUpdate () {
+                console.log('bar -- beforeUpdate');
+            },
+            updated () {
+                console.log('bar -- updated');
+            },
+            beforeDestroy () {
+                console.log('bar -- beforeDestory');
+            },
+            destroyed () {
+                console.log('bar -- destoryed');
+            },
+            template:`<div>Bar</div>`
         }
 
         // 局部注册的子组件

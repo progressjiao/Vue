@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // 子组件的子组件
+        const Bar = {
+            template:`<div>Bar</div>`
+        }
+
+        // 局部注册的子组件
+        const Foo = {
+            // 在组件中定义props
+            props: {
+                message: {
+                    type: String,
+                    default: "hello"
+                },
+            },
+            data() {
+                return {
+                    msg: "Foo"
+                }
+            },
+            components: {
+                Bar,
+            },
+            template:`<div>{{msg}} --- {{message}}
+                <Bar></Bar></div>`
+        }
+
+        //根组件
+        const app = new Vue({
+            el:"#app",
+            data:{
+                msg:'hello vue!',
+                showFoo:true
+            },
+            components: {
+                Foo
+            },
+            methods: {
+                handleShowfoo() {
+                    this.showFoo = !this.showFoo;
+                }
+            },
+            template:`<div>
+                {{msg}}
+                <Foo message = 'hhh'></Foo>
+            </div>` 
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // 子组件的子组件
+        const Bar = {
+            methods: {
+                handleClick() {
+                    // 发出事件并可以传参数
+                    this.$emit('hello', 1, 3);
+                }
+            },
+            template:`<div>Bar
+                <button @click="handleClick">to Foo</button>    
+            </div>`
+        }
+
+        // 局部注册的子组件
+        const Foo = {
+            data() {
+                return {
+                    msg: "Foo"
+                }
+            },
+            components: {
+                Bar,
+            },
+            methods: {
+                handleHello(a, b) {
+                    // 这里可以接收参数
+                    console.log('hello', a, b)
+                }
+            },
+            // 在Bar里处理发出的事件
+            template:`<div>{{msg}}
+                <Bar @hello="handleHello"></Bar></div>`
+        }
+
+        //根组件
+        const app = new Vue({
+            el:"#app",
+            data:{
+                msg:'hello vue!',
+                showFoo:true
+            },
+            components: {
+                Foo
+            },
+            methods: {
+                handleShowfoo() {
+                    this.showFoo = !this.showFoo;
+                }
+            },
+            template:`<div>
+                {{msg}}
+                <Foo></Foo>
+            </div>` 
+        })
+    </script>
+</body>
+</html>
