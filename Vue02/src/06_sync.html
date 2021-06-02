@@ -12,18 +12,9 @@
     <script>
         // 子组件的子组件
         const Bar = {
-            methods: {
-                handleClick() {
-                    // 发出事件并可以传参数
-                    this.$emit('hello', 1, 3);
-                },
-                handleClose() {
-                    this.$emit('close');
-                }
-            },
-            template:`<div>Bar
-                <button @click="handleClick">to Foo</button>    
-                <button @click="handleClose">close</button>
+            props:["visible"],
+            template:`<div v-show="visible">Bar   
+                <button @click="$emit('update:visible',false)">close</button>
             </div>`
         }
 
@@ -39,21 +30,13 @@
                 Bar,
             },
             methods: {
-                handleHello(a, b) {
-                    // 这里可以接收参数
-                    console.log('hello', a, b)
-                },
-                handleClose() {
-                    this.showBar = false;
-                },
                 handleShowBar() {
                     this.showBar = true;
                 }
             },
-            // 在Bar里处理发出的事件hello
             template:`<div>{{msg}}
                 <button @click="handleShowBar">show bar</button>
-                <Bar v-show="showBar" @hello="handleHello" @close="handleClose"></Bar></div>`
+                <Bar :visible.sync="showBar"></Bar></div>`
         }
 
         //根组件

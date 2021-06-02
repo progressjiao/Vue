@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // 需求：实现一个组件，封装展示图片的逻辑，通过props传入图片的路径和名称
+        const Photo = {
+            props: {
+                photo_src: {
+                    type: String,
+                    default: "./pics/1.png"
+                },
+                name: {
+                    type: String,
+                    default: "father"
+                },
+            },
+            template:`<div>
+                    <img :src="photo_src" />
+                    <p>{{name}}</p>
+                </div>`
+        }
+
+        //根组件
+        const app = new Vue({
+            el:"#app",
+            data:{
+                msg:'hello vue!',
+            },
+            components: {
+                Photo
+            },
+            template:`<div>
+                <Photo photo_src="./pics/2.jpg" name="fp"></Photo>
+            </div>` 
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        const mousemoveMixin = {
+            data() {
+                return {
+                    x:0,
+                    y:0
+                }
+            },
+            methods: {
+                handleMousemove(e) {
+                    this.x = e.pageX;
+                    this.y = e.pageY;
+                }
+            },
+            created () {
+                window.addEventListener("mousemove", this.handleMousemove);
+            },
+            destroyed() {
+                window.removeEventListener("mousemove", this.handleMousemove);
+            },
+        }
+
+        const Bar = {
+            mixins:[mousemoveMixin],
+            template:`<div>
+                Bar {{x}} -- {{y}}  
+            </div>`
+        }
+
+        const Foo = {
+            data() {
+                return {
+                    msg_foo: "Foo", 
+                }
+            },
+            components: {
+                Bar,
+            },
+            mixins: [mousemoveMixin],
+            template:`<div>Foo {{x}} -- {{y}}
+                <Bar></Bar></div>`
+        }
+
+        //根组件
+        const app = new Vue({
+            el:"#app",
+            data:{
+                msg:'hello vue!',
+            },
+            components: {
+                Foo
+            },
+            template:`<div>
+                <Foo></Foo>
+            </div>` 
+        })
+    </script>
+</body>
+</html>
